@@ -1492,7 +1492,8 @@ def main():
                      matches, mode, days_until, general_news)
     OUTPUT_PATH.write_text(html, encoding="utf-8")
     print(f"  נשמר: {OUTPUT_PATH}")
-    webbrowser.open(OUTPUT_PATH.as_uri())
+    if not _on_actions:
+        webbrowser.open(OUTPUT_PATH.as_uri())
     print("  נפתח בדפדפן ✓\n")
 
 if __name__ == "__main__":
