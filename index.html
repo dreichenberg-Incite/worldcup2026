@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 2026</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1f2d45;
+    --gold: #f5c518;
+    --red: #e63946;
+    --blue: #3a86ff;
+    --green: #06d6a0;
+    --text: #e8eaf0;
+    --muted: #8090a8;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,14,26,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px; }
+  .logo-icon { font-size: 1.8rem; }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links button {
+    background: none; border: none; color: var(--muted);
+    padding: 8px 16px; border-radius: 8px; cursor: pointer;
+    font-size: 0.9rem; font-weight: 600; transition: all 0.2s;
+  }
+  .nav-links button:hover { color: var(--text); background: var(--surface); }
+  .nav-links button.active { color: var(--gold); background: rgba(245,197,24,0.1); }
+  .nav-badge { background: var(--red); color: #fff; font-size: 0.65rem; padding: 2px 6px; border-radius: 20px; margin-left: 4px; font-weight: 700; }
+
+  /* PAGES */
+  .page { display: none; padding: 32px 24px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a1628 0%, #1a0a2e 50%, #0a1628 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.15) 0%, transparent 60%);
+  }
+  .hero-tag { display: inline-block; background: var(--gold); color: #000; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 12px; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
+  .hero-hosts { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .host-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 10px 20px; border-radius: 40px; font-weight: 600;
+  }
+  .host-flag { font-size: 1.4rem; }
+
+  /* STAT CARDS */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    text-align: center;
+  }
+  .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--gold); }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+
+  /* SECTION HEADER */
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .section-header h2 { font-size: 1.3rem; font-weight: 800; }
+  .section-header h2 span { color: var(--gold); }
+
+  /* QUALIFIED TEAMS GRID */
+  .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .team-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 12px;
+    text-align: center; cursor: pointer;
+    transition: all 0.2s; position: relative;
+  }
+  .team-card:hover { border-color: var(--gold); transform: translateY(-2px); background: var(--surface2); }
+  .team-flag { font-size: 2.2rem; margin-bottom: 8px; }
+  .team-name { font-size: 0.8rem; font-weight: 700; color: var(--text); }
+  .team-conf { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+  .host-badge { position: absolute; top: 6px; right: 6px; background: var(--gold); color: #000; font-size: 0.6rem; font-weight: 800; padding: 2px 5px; border-radius: 4px; }
+
+  /* GROUPS PAGE */
+  .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+  .group-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .group-header { background: var(--surface2); padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+  .group-letter { background: var(--gold); color: #000; font-weight: 900; font-size: 0.9rem; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .group-header h3 { font-size: 0.95rem; font-weight: 700; }
+  .group-table { width: 100%; }
+  .group-table th { font-size: 0.7rem; color: var(--muted); font-weight: 700; text-transform: uppercase; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  .group-table th:not(:first-child) { text-align: center; width: 32px; }
+  .group-table td { padding: 10px 12px; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+  .group-table td:not(:first-child) { text-align: center; color: var(--muted); }
+  .group-table tr:last-child td { border-bottom: none; }
+  .group-table tr:hover td { background: var(--surface2); }
+  .team-cell { display: flex; align-items: center; gap: 8px; }
+  .team-cell .flag { font-size: 1.1rem; }
+  .qualify-row td:first-child { border-left: 3px solid var(--green); }
+  .qualify-row2 td:first-child { border-left: 3px solid var(--blue); }
+
+  /* SCHEDULE PAGE */
+  .phase-tabs { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+  .phase-tab {
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); padding: 8px 18px; border-radius: 8px;
+    cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s;
+  }
+  .phase-tab:hover { color: var(--text); }
+  .phase-tab.active { background: var(--gold); color: #000; border-color: var(--gold); }
+  .matches-list { display: flex; flex-direction: column; gap: 12px; }
+  .match-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .match-card:hover { border-color: var(--border); }
+  .match-team { display: flex; align-items: center; gap: 10px; }
+  .match-team.right { flex-direction: row-reverse; }
+  .match-team-name { font-weight: 700; font-size: 0.95rem; }
+  .match-flag { font-size: 1.5rem; }
+  .match-center { text-align: center; }
+  .match-score {
+    font-size: 1.4rem; font-weight: 900;
+    background: var(--surface2); padding: 8px 16px;
+    border-radius: 8px; letter-spacing: 2px; white-space: nowrap;
+  }
+  .match-score.live { color: var(--red); animation: pulse 1.5s infinite; }
+  .match-date { font-size: 0.75rem; color: var(--muted); margin-top: 6px; }
+  .match-venue { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .match-group { display: inline-block; background: rgba(245,197,24,0.15); color: var(--gold); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 4px; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  .day-divider { display: flex; align-items: center; gap: 12px; margin: 24px 0 12px; }
+  .day-divider span { color: var(--muted); font-size: 0.8rem; font-weight: 700; white-space: nowrap; }
+  .day-divider::before, .day-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* TEAMS PAGE */
+  .confederation-filter { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .conf-btn {
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); padding: 6px 14px; border-radius: 6px;
+    cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s;
+  }
+  .conf-btn:hover { color: var(--text); }
+  .conf-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .teams-big-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .team-big-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px 16px;
+    text-align: center; transition: all 0.2s; cursor: default;
+  }
+  .team-big-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .team-big-flag { font-size: 3rem; margin-bottom: 12px; }
+  .team-big-name { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+  .team-big-conf { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+  .team-big-rank { font-size: 0.75rem; }
+  .rank-badge { display: inline-block; background: var(--surface2); padding: 3px 8px; border-radius: 4px; color: var(--muted); }
+  .rank-badge.top { color: var(--gold); background: rgba(245,197,24,0.1); }
+
+  /* STATS PAGE */
+  .stats-page-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .stats-page-grid { grid-template-columns: 1fr; } }
+  .stats-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .stats-block-header { padding: 16px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); font-weight: 800; font-size: 0.95rem; }
+  .stats-block-header span { color: var(--gold); }
+  .stats-list { list-style: none; }
+  .stats-list li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 20px; border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .stats-list li:last-child { border-bottom: none; }
+  .stats-rank { width: 24px; height: 24px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--muted); flex-shrink: 0; }
+  .stats-rank.gold { background: var(--gold); color: #000; }
+  .stats-rank.silver { background: #c0c0c0; color: #000; }
+  .stats-rank.bronze { background: #cd7f32; color: #fff; }
+  .stats-info { flex: 1; }
+  .stats-info strong { display: block; font-weight: 700; }
+  .stats-info small { color: var(--muted); font-size: 0.78rem; }
+  .stats-val { font-size: 1.1rem; font-weight: 900; color: var(--gold); }
+  .wide-block { grid-column: 1 / -1; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 0 12px; }
+    .nav-links button { padding: 6px 10px; font-size: 0.8rem; }
+    .page { padding: 20px 12px; }
+    .hero { padding: 40px 20px; }
+    .match-card { grid-template-columns: 1fr; text-align: center; }
+    .match-team { justify-content: center; }
+    .match-team.right { flex-direction: row; justify-content: center; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* COUNTDOWN */
+  .countdown-banner {
+    background: linear-gradient(90deg, rgba(245,197,24,0.1), rgba(58,134,255,0.1));
+    border: 1px solid rgba(245,197,24,0.3);
+    border-radius: var(--radius); padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+  }
+  .countdown-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .countdown-timer { display: flex; gap: 16px; }
+  .cd-unit { text-align: center; }
+  .cd-num { font-size: 1.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .cd-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .cd-sep { font-size: 1.5rem; color: var(--border); align-self: flex-start; padding-top: 4px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <span class="logo-icon">⚽</span>
+    <div>FIFA <span>2026</span></div>
+  </div>
+  <div class="nav-links">
+    <button class="active" onclick="showPage('home')">Home</button>
+    <button onclick="showPage('groups')">Groups</button>
+    <button onclick="showPage('schedule')">Schedule</button>
+    <button onclick="showPage('teams')">Teams</button>
+    <button onclick="showPage('stats')">Stats</button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-tag">🏆 Official Tournament</div>
+    <h1>FIFA World Cup <span>2026™</span></h1>
+    <p>48 Teams · 104 Matches · 3 Nations · One Champion</p>
+    <div class="hero-hosts">
+      <div class="host-pill"><span class="host-flag">🇺🇸</span> United States</div>
+      <div class="host-pill"><span class="host-flag">🇨🇦</span> Canada</div>
+      <div class="host-pill"><span class="host-flag">🇲🇽</span> Mexico</div>
+    </div>
+  </div>
+
+  <div id="countdown-banner" class="countdown-banner">
+    <div>
+      <div class="countdown-label">Tournament Begins</div>
+      <div style="font-weight:700;font-size:1rem;">June 11, 2026 · MetLife Stadium, New Jersey</div>
+    </div>
+    <div class="countdown-timer">
+      <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Mins</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Secs</div></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">48</div><div class="stat-label">Qualified Teams</div></div>
+    <div class="stat-card"><div class="stat-num">104</div><div class="stat-label">Total Matches</div></div>
+    <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">Host Cities</div></div>
+    <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Groups</div></div>
+    <div class="stat-card"><div class="stat-num">32</div><div class="stat-label">Days of Action</div></div>
+    <div class="stat-card"><div class="stat-num">$1B</div><div class="stat-label">Prize Money</div></div>
+  </div>
+
+  <div class="section-header">
+    <h2>Qualified <span>Teams</span></h2>
+    <span style="color:var(--muted);font-size:0.85rem;">48 nations</span>
+  </div>
+  <div class="teams-grid" id="home-teams-grid"></div>
+</div>
+
+<!-- GROUPS PAGE -->
+<div id="page-groups" class="page">
+  <div class="section-header">
+    <h2>Group <span>Stage</span></h2>
+    <span style="color:var(--muted);font-size:0.85rem;">12 Groups · Top 2 advance + 8 best 3rd place</span>
+  </div>
+  <div style="display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--muted);">
+      <div style="width:12px;height:12px;background:var(--green);border-radius:2px;"></div> Advances to Round of 32
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--muted);">
+      <div style="width:12px;height:12px;background:var(--blue);border-radius:2px;"></div> Potential 3rd place qualifier
+    </div>
+  </div>
+  <div class="groups-grid" id="groups-grid"></div>
+</div>
+
+<!-- SCHEDULE PAGE -->
+<div id="page-schedule" class="page">
+  <div class="section-header">
+    <h2>Match <span>Schedule</span></h2>
+  </div>
+  <div class="phase-tabs" id="phase-tabs"></div>
+  <div class="matches-list" id="matches-list"></div>
+</div>
+
+<!-- TEAMS PAGE -->
+<div id="page-teams" class="page">
+  <div class="section-header">
+    <h2>All <span>48 Teams</span></h2>
+  </div>
+  <div class="confederation-filter" id="conf-filter"></div>
+  <div class="teams-big-grid" id="teams-big-grid"></div>
+</div>
+
+<!-- STATS PAGE -->
+<div id="page-stats" class="page">
+  <div class="section-header">
+    <h2>World Cup <span>Stats & Records</span></h2>
+  </div>
+  <div class="stats-page-grid" id="stats-grid"></div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const TEAMS = [
+  // UEFA (Europe) - 16 spots
+  { name: 'Germany', flag: '🇩🇪', conf: 'UEFA', rank: 16, host: false },
+  { name: 'France', flag: '🇫🇷', conf: 'UEFA', rank: 2, host: false },
+  { name: 'Spain', flag: '🇪🇸', conf: 'UEFA', rank: 8, host: false },
+  { name: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', conf: 'UEFA', rank: 5, host: false },
+  { name: 'Portugal', flag: '🇵🇹', conf: 'UEFA', rank: 6, host: false },
+  { name: 'Netherlands', flag: '🇳🇱', conf: 'UEFA', rank: 7, host: false },
+  { name: 'Belgium', flag: '🇧🇪', conf: 'UEFA', rank: 3, host: false },
+  { name: 'Italy', flag: '🇮🇹', conf: 'UEFA', rank: 9, host: false },
+  { name: 'Croatia', flag: '🇭🇷', conf: 'UEFA', rank: 10, host: false },
+  { name: 'Austria', flag: '🇦🇹', conf: 'UEFA', rank: 25, host: false },
+  { name: 'Switzerland', flag: '🇨🇭', conf: 'UEFA', rank: 19, host: false },
+  { name: 'Serbia', flag: '🇷🇸', conf: 'UEFA', rank: 33, host: false },
+  { name: 'Denmark', flag: '🇩🇰', conf: 'UEFA', rank: 21, host: false },
+  { name: 'Poland', flag: '🇵🇱', conf: 'UEFA', rank: 28, host: false },
+  { name: 'Ukraine', flag: '🇺🇦', conf: 'UEFA', rank: 22, host: false },
+  { name: 'Turkey', flag: '🇹🇷', conf: 'UEFA', rank: 37, host: false },
+  // CONMEBOL (South America) - 6 spots
+  { name: 'Brazil', flag: '🇧🇷', conf: 'CONMEBOL', rank: 5, host: false },
+  { name: 'Argentina', flag: '🇦🇷', conf: 'CONMEBOL', rank: 1, host: false },
+  { name: 'Uruguay', flag: '🇺🇾', conf: 'CONMEBOL', rank: 15, host: false },
+  { name: 'Colombia', flag: '🇨🇴', conf: 'CONMEBOL', rank: 11, host: false },
+  { name: 'Ecuador', flag: '🇪🇨', conf: 'CONMEBOL', rank: 35, host: false },
+  { name: 'Venezuela', flag: '🇻🇪', conf: 'CONMEBOL', rank: 56, host: false },
+  // CONCACAF (North/Central America) - 6 spots (incl 3 hosts)
+  { name: 'USA', flag: '🇺🇸', conf: 'CONCACAF', rank: 13, host: true },
+  { name: 'Canada', flag: '🇨🇦', conf: 'CONCACAF', rank: 43, host: true },
+  { name: 'Mexico', flag: '🇲🇽', conf: 'CONCACAF', rank: 17, host: true },
+  { name: 'Costa Rica', flag: '🇨🇷', conf: 'CONCACAF', rank: 54, host: false },
+  { name: 'Panama', flag: '🇵🇦', conf: 'CONCACAF', rank: 67, host: false },
+  { name: 'Honduras', flag: '🇭🇳', conf: 'CONCACAF', rank: 75, host: false },
+  // AFC (Asia) - 8.5 spots
+  { name: 'Japan', flag: '🇯🇵', conf: 'AFC', rank: 18, host: false },
+  { name: 'South Korea', flag: '🇰🇷', conf: 'AFC', rank: 23, host: false },
+  { name: 'Iran', flag: '🇮🇷', conf: 'AFC', rank: 22, host: false },
+  { name: 'Saudi Arabia', flag: '🇸🇦', conf: 'AFC', rank: 56, host: false },
+  { name: 'Australia', flag: '🇦🇺', conf: 'AFC', rank: 24, host: false },
+  { name: 'Qatar', flag: '🇶🇦', conf: 'AFC', rank: 37, host: false },
+  { name: 'Iraq', flag: '🇮🇶', conf: 'AFC', rank: 63, host: false },
+  { name: 'Jordan', flag: '🇯🇴', conf: 'AFC', rank: 70, host: false },
+  // CAF (Africa) - 9 spots
+  { name: 'Morocco', flag: '🇲🇦', conf: 'CAF', rank: 14, host: false },
+  { name: 'Senegal', flag: '🇸🇳', conf: 'CAF', rank: 20, host: false },
+  { name: 'Nigeria', flag: '🇳🇬', conf: 'CAF', rank: 40, host: false },
+  { name: 'Egypt', flag: '🇪🇬', conf: 'CAF', rank: 34, host: false },
+  { name: 'Cameroon', flag: '🇨🇲', conf: 'CAF', rank: 44, host: false },
+  { name: 'Ghana', flag: '🇬🇭', conf: 'CAF', rank: 60, host: false },
+  { name: 'Ivory Coast', flag: '🇨🇮', conf: 'CAF', rank: 48, host: false },
+  { name: 'Tunisia', flag: '🇹🇳', conf: 'CAF', rank: 36, host: false },
+  { name: 'Algeria', flag: '🇩🇿', conf: 'CAF', rank: 52, host: false },
+  // OFC + Intercontinental
+  { name: 'New Zealand', flag: '🇳🇿', conf: 'OFC', rank: 96, host: false },
+  { name: 'Indonesia', flag: '🇮🇩', conf: 'AFC', rank: 133, host: false },
+  { name: 'Paraguay', flag: '🇵🇾', conf: 'CONMEBOL', rank: 72, host: false },
+];
+
+const GROUPS = [
+  { id: 'A', teams: ['USA', 'Brazil', 'Morocco', 'Japan'] },
+  { id: 'B', teams: ['Argentina', 'France', 'Germany', 'Serbia'] },
+  { id: 'C', teams: ['Spain', 'England', 'Iran', 'Ecuador'] },
+  { id: 'D', teams: ['Portugal', 'Netherlands', 'South Korea', 'Senegal'] },
+  { id: 'E', teams: ['Belgium', 'Mexico', 'Egypt', 'Saudi Arabia'] },
+  { id: 'F', teams: ['Italy', 'Croatia', 'Australia', 'Nigeria'] },
+  { id: 'G', teams: ['Canada', 'Colombia', 'Switzerland', 'Ivory Coast'] },
+  { id: 'H', teams: ['Uruguay', 'Turkey', 'Algeria', 'Ghana'] },
+  { id: 'I', teams: ['Denmark', 'Poland', 'Tunisia', 'Qatar'] },
+  { id: 'J', teams: ['Austria', 'Ukraine', 'Cameroon', 'Jordan'] },
+  { id: 'K', teams: ['Costa Rica', 'Venezuela', 'Iraq', 'New Zealand'] },
+  { id: 'L', teams: ['Panama', 'Honduras', 'Indonesia', 'Paraguay'] },
+];
+
+const MATCHES = [
+  // Group Stage - Sample key matches
+  { phase: 'Group Stage', date: 'Jun 11', time: '8:00 PM ET', home: 'USA', away: 'Brazil', score: null, venue: 'MetLife Stadium, New Jersey', group: 'A' },
+  { phase: 'Group Stage', date: 'Jun 12', time: '3:00 PM ET', home: 'Argentina', away: 'France', score: null, venue: 'Rose Bowl, Los Angeles', group: 'B' },
+  { phase: 'Group Stage', date: 'Jun 12', time: '6:00 PM ET', home: 'Germany', away: 'Serbia', score: null, venue: 'AT&T Stadium, Dallas', group: 'B' },
+  { phase: 'Group Stage', date: 'Jun 13', time: '3:00 PM ET', home: 'Spain', away: 'England', score: null, venue: 'SoFi Stadium, Los Angeles', group: 'C' },
+  { phase: 'Group Stage', date: 'Jun 13', time: '6:00 PM ET', home: 'Morocco', away: 'Japan', score: null, venue: 'Arrowhead Stadium, Kansas City', group: 'A' },
+  { phase: 'Group Stage', date: 'Jun 14', time: '3:00 PM ET', home: 'Portugal', away: 'Netherlands', score: null, venue: 'MetLife Stadium, New Jersey', group: 'D' },
+  { phase: 'Group Stage', date: 'Jun 14', time: '6:00 PM ET', home: 'Belgium', away: 'Mexico', score: null, venue: 'Estadio Azteca, Mexico City', group: 'E' },
+  { phase: 'Group Stage', date: 'Jun 15', time: '3:00 PM ET', home: 'Italy', away: 'Croatia', score: null, venue: 'Levi\'s Stadium, San Jose', group: 'F' },
+  { phase: 'Group Stage', date: 'Jun 15', time: '6:00 PM ET', home: 'Canada', away: 'Colombia', score: null, venue: 'BC Place, Vancouver', group: 'G' },
+  { phase: 'Group Stage', date: 'Jun 16', time: '3:00 PM ET', home: 'Brazil', away: 'Morocco', score: null, venue: 'Rose Bowl, Los Angeles', group: 'A' },
+  { phase: 'Group Stage', date: 'Jun 16', time: '6:00 PM ET', home: 'France', away: 'Germany', score: null, venue: 'AT&T Stadium, Dallas', group: 'B' },
+  // Round of 32
+  { phase: 'Round of 32', date: 'Jul 4', time: '3:00 PM ET', home: '1A', away: '3F/G/H', score: null, venue: 'MetLife Stadium, New Jersey', group: null },
+  { phase: 'Round of 32', date: 'Jul 4', time: '7:00 PM ET', home: '1B', away: '3I/J/K', score: null, venue: 'Rose Bowl, Los Angeles', group: null },
+  { phase: 'Round of 32', date: 'Jul 5', time: '3:00 PM ET', home: '1C', away: '2D', score: null, venue: 'AT&T Stadium, Dallas', group: null },
+  { phase: 'Round of 32', date: 'Jul 5', time: '7:00 PM ET', home: '1D', away: '2C', score: null, venue: 'SoFi Stadium, Los Angeles', group: null },
+  // Quarter-Finals
+  { phase: 'Quarter-Finals', date: 'Jul 18', time: '3:00 PM ET', home: 'QF1', away: 'QF2', score: null, venue: 'MetLife Stadium, New Jersey', group: null },
+  { phase: 'Quarter-Finals', date: 'Jul 18', time: '7:00 PM ET', home: 'QF3', away: 'QF4', score: null, venue: 'Rose Bowl, Los Angeles', group: null },
+  { phase: 'Quarter-Finals', date: 'Jul 19', time: '3:00 PM ET', home: 'QF5', away: 'QF6', score: null, venue: 'AT&T Stadium, Dallas', group: null },
+  { phase: 'Quarter-Finals', date: 'Jul 19', time: '7:00 PM ET', home: 'QF7', away: 'QF8', score: null, venue: 'Estadio Azteca, Mexico City', group: null },
+  // Semi-Finals
+  { phase: 'Semi-Finals', date: 'Jul 23', time: '7:00 PM ET', home: 'SF1', away: 'SF2', score: null, venue: 'MetLife Stadium, New Jersey', group: null },
+  { phase: 'Semi-Finals', date: 'Jul 24', time: '7:00 PM ET', home: 'SF3', away: 'SF4', score: null, venue: 'Rose Bowl, Los Angeles', group: null },
+  // Final
+  { phase: 'Final', date: 'Jul 19', time: '5:00 PM ET', home: 'TBD', away: 'TBD', score: null, venue: 'MetLife Stadium, New Jersey', group: null },
+];
+
+const HISTORICAL_STATS = {
+  winners: [
+    { name: 'Brazil', flag: '🇧🇷', wins: 5, years: '1958, 1962, 1970, 1994, 2002' },
+    { name: 'Germany', flag: '🇩🇪', wins: 4, years: '1954, 1974, 1990, 2014' },
+    { name: 'Italy', flag: '🇮🇹', wins: 4, years: '1934, 1938, 1982, 2006' },
+    { name: 'Argentina', flag: '🇦🇷', wins: 3, years: '1978, 1986, 2022' },
+    { name: 'France', flag: '🇫🇷', wins: 2, years: '1998, 2018' },
+    { name: 'Uruguay', flag: '🇺🇾', wins: 2, years: '1930, 1950' },
+    { name: 'Spain', flag: '🇪🇸', wins: 1, years: '2010' },
+    { name: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', wins: 1, years: '1966' },
+  ],
+  topScorers: [
+    { name: 'Miroslav Klose', flag: '🇩🇪', goals: 16, years: '2002–2014' },
+    { name: 'Ronaldo', flag: '🇧🇷', goals: 15, years: '1994–2006' },
+    { name: 'Gerd Müller', flag: '🇩🇪', goals: 14, years: '1970–1974' },
+    { name: 'Just Fontaine', flag: '🇫🇷', goals: 13, years: '1958' },
+    { name: 'Lionel Messi', flag: '🇦🇷', goals: 13, years: '2006–2022' },
+    { name: 'Pelé', flag: '🇧🇷', goals: 12, years: '1958–1970' },
+    { name: 'Jürgen Klinsmann', flag: '🇩🇪', goals: 11, years: '1990–1998' },
+    { name: 'Sándor Kocsis', flag: '🇭🇺', goals: 11, years: '1954' },
+  ],
+  venues: [
+    { name: 'MetLife Stadium', city: 'East Rutherford, NJ', capacity: '82,500', country: '🇺🇸' },
+    { name: 'Rose Bowl', city: 'Pasadena, CA', capacity: '92,000', country: '🇺🇸' },
+    { name: 'Estadio Azteca', city: 'Mexico City', capacity: '87,000', country: '🇲🇽' },
+    { name: 'AT&T Stadium', city: 'Arlington, TX', capacity: '80,000', country: '🇺🇸' },
+    { name: 'SoFi Stadium', city: 'Inglewood, CA', capacity: '70,000', country: '🇺🇸' },
+    { name: 'BC Place', city: 'Vancouver, BC', capacity: '54,500', country: '🇨🇦' },
+    { name: 'BMO Field', city: 'Toronto, ON', capacity: '45,000', country: '🇨🇦' },
+    { name: 'Estadio BBVA', city: 'Monterrey', capacity: '53,000', country: '🇲🇽' },
+  ],
+};
+
+// ============================================================
+// HELPERS
+// ============================================================
+function getTeam(name) {
+  return TEAMS.find(t => t.name === name);
+}
+
+// ============================================================
+// COUNTDOWN
+// ============================================================
+function updateCountdown() {
+  const target = new Date('2026-06-11T20:00:00-04:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    document.getElementById('countdown-banner').innerHTML = '<div style="font-size:1.2rem;font-weight:800;color:var(--gold)">🏆 The World Cup has begun!</div>';
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  const pad = n => String(n).padStart(2, '0');
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = pad(hours);
+  document.getElementById('cd-mins').textContent = pad(mins);
+  document.getElementById('cd-secs').textContent = pad(secs);
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ============================================================
+// HOME PAGE
+// ============================================================
+function renderHomePage() {
+  const grid = document.getElementById('home-teams-grid');
+  grid.innerHTML = TEAMS.map(t => `
+    <div class="team-card" onclick="showPage('teams')">
+      ${t.host ? '<div class="host-badge">HOST</div>' : ''}
+      <div class="team-flag">${t.flag}</div>
+      <div class="team-name">${t.name}</div>
+      <div class="team-conf">${t.conf}</div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// GROUPS PAGE
+// ============================================================
+function renderGroups() {
+  const grid = document.getElementById('groups-grid');
+  grid.innerHTML = GROUPS.map(g => {
+    const teamRows = g.teams.map((name, i) => {
+      const team = getTeam(name);
+      if (!team) return '';
+      const rowClass = i === 0 ? 'qualify-row' : i === 1 ? 'qualify-row' : i === 2 ? 'qualify-row2' : '';
+      return `
+        <tr class="${rowClass}">
+          <td><div class="team-cell">
+            <span class="flag">${team.flag}</span>
+            <span>${team.name}</span>
+          </div></td>
+          <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>`;
+    }).join('');
+    return `
+      <div class="group-card">
+        <div class="group-header">
+          <div class="group-letter">${g.id}</div>
+          <h3>Group ${g.id}</h3>
+        </div>
+        <table class="group-table">
+          <thead><tr>
+            <th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th>
+          </tr></thead>
+          <tbody>${teamRows}</tbody>
+        </table>
+      </div>`;
+  }).join('');
+}
+
+// ============================================================
+// SCHEDULE PAGE
+// ============================================================
+let currentPhase = 'Group Stage';
+const phases = ['Group Stage', 'Round of 32', 'Quarter-Finals', 'Semi-Finals', 'Final'];
+
+function renderSchedule() {
+  const tabsEl = document.getElementById('phase-tabs');
+  tabsEl.innerHTML = phases.map(p => `
+    <div class="phase-tab ${p === currentPhase ? 'active' : ''}" onclick="setPhase('${p}')">${p}</div>
+  `).join('');
+  renderMatches();
+}
+
+function setPhase(phase) {
+  currentPhase = phase;
+  renderSchedule();
+}
+
+function renderMatches() {
+  const list = document.getElementById('matches-list');
+  const filtered = MATCHES.filter(m => m.phase === currentPhase);
+
+  let html = '';
+  let lastDate = '';
+  filtered.forEach(m => {
+    if (m.date !== lastDate) {
+      html += `<div class="day-divider"><span>${m.date}, 2026</span></div>`;
+      lastDate = m.date;
+    }
+    const homeTeam = getTeam(m.home);
+    const awayTeam = getTeam(m.away);
+    const homeFlag = homeTeam ? homeTeam.flag : '🏳️';
+    const awayFlag = awayTeam ? awayTeam.flag : '🏳️';
+    html += `
+      <div class="match-card">
+        <div class="match-team">
+          <span class="match-flag">${homeFlag}</span>
+          <span class="match-team-name">${m.home}</span>
+        </div>
+        <div class="match-center">
+          <div class="match-score">${m.score || 'vs'}</div>
+          <div class="match-date">${m.date} · ${m.time}</div>
+          <div class="match-venue">📍 ${m.venue}</div>
+          ${m.group ? `<div class="match-group">Group ${m.group}</div>` : ''}
+        </div>
+        <div class="match-team right">
+          <span class="match-flag">${awayFlag}</span>
+          <span class="match-team-name">${m.away}</span>
+        </div>
+      </div>`;
+  });
+  list.innerHTML = html;
+}
+
+// ============================================================
+// TEAMS PAGE
+// ============================================================
+let currentConf = 'All';
+const confs = ['All', 'UEFA', 'CONMEBOL', 'CONCACAF', 'AFC', 'CAF', 'OFC'];
+
+function renderTeamsPage() {
+  const filter = document.getElementById('conf-filter');
+  filter.innerHTML = confs.map(c => `
+    <div class="conf-btn ${c === currentConf ? 'active' : ''}" onclick="setConf('${c}')">${c}</div>
+  `).join('');
+  renderTeamCards();
+}
+
+function setConf(conf) {
+  currentConf = conf;
+  renderTeamsPage();
+}
+
+function renderTeamCards() {
+  const grid = document.getElementById('teams-big-grid');
+  const filtered = currentConf === 'All' ? TEAMS : TEAMS.filter(t => t.conf === currentConf);
+  grid.innerHTML = filtered.map(t => `
+    <div class="team-big-card">
+      ${t.host ? '<div style="text-align:right;margin-bottom:-8px;"><span style="background:var(--gold);color:#000;font-size:0.65rem;font-weight:800;padding:2px 7px;border-radius:4px;">HOST</span></div>' : ''}
+      <div class="team-big-flag">${t.flag}</div>
+      <div class="team-big-name">${t.name}</div>
+      <div class="team-big-conf">${t.conf}</div>
+      <div class="team-big-rank">
+        <span class="rank-badge ${t.rank <= 10 ? 'top' : ''}">FIFA #${t.rank}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// STATS PAGE
+// ============================================================
+function renderStats() {
+  const grid = document.getElementById('stats-grid');
+
+  const rankClass = i => i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+
+  const winnersHTML = HISTORICAL_STATS.winners.map((w, i) => `
+    <li>
+      <div class="stats-rank ${rankClass(i)}">${i+1}</div>
+      <div class="stats-info">
+        <strong>${w.flag} ${w.name}</strong>
+        <small>${w.years}</small>
+      </div>
+      <div class="stats-val">${w.wins}×</div>
+    </li>`).join('');
+
+  const scorersHTML = HISTORICAL_STATS.topScorers.map((s, i) => `
+    <li>
+      <div class="stats-rank ${rankClass(i)}">${i+1}</div>
+      <div class="stats-info">
+        <strong>${s.flag} ${s.name}</strong>
+        <small>${s.years}</small>
+      </div>
+      <div class="stats-val">${s.goals}</div>
+    </li>`).join('');
+
+  const venuesHTML = HISTORICAL_STATS.venues.map((v, i) => `
+    <li>
+      <div class="stats-rank">${v.country}</div>
+      <div class="stats-info">
+        <strong>${v.name}</strong>
+        <small>${v.city}</small>
+      </div>
+      <div class="stats-val" style="font-size:0.8rem;color:var(--muted)">${v.capacity}</div>
+    </li>`).join('');
+
+  grid.innerHTML = `
+    <div class="stats-block">
+      <div class="stats-block-header">🏆 All-Time <span>World Cup Winners</span></div>
+      <ul class="stats-list">${winnersHTML}</ul>
+    </div>
+    <div class="stats-block">
+      <div class="stats-block-header">⚽ All-Time <span>Top Scorers</span></div>
+      <ul class="stats-list">${scorersHTML}</ul>
+    </div>
+    <div class="stats-block wide-block">
+      <div class="stats-block-header">🏟️ <span>2026 Host Venues</span></div>
+      <ul class="stats-list">${venuesHTML}</ul>
+    </div>
+    <div class="stats-block">
+      <div class="stats-block-header">📊 <span>2026 Tournament Facts</span></div>
+      <ul class="stats-list">
+        <li><div class="stats-rank">🌎</div><div class="stats-info"><strong>Host Nations</strong><small>First 3-nation World Cup</small></div><div class="stats-val">3</div></li>
+        <li><div class="stats-rank">⚽</div><div class="stats-info"><strong>Teams</strong><small>Expanded from 32</small></div><div class="stats-val">48</div></li>
+        <li><div class="stats-rank">🎯</div><div class="stats-info"><strong>Total Matches</strong><small>Up from 64</small></div><div class="stats-val">104</div></li>
+        <li><div class="stats-rank">🏟️</div><div class="stats-info"><strong>Host Stadiums</strong><small>Across 3 countries</small></div><div class="stats-val">16</div></li>
+        <li><div class="stats-rank">💰</div><div class="stats-info"><strong>Total Prize Fund</strong><small>Record payout</small></div><div class="stats-val">$1B</div></li>
+        <li><div class="stats-rank">📅</div><div class="stats-info"><strong>Tournament Duration</strong><small>Jun 11 – Jul 19</small></div><div class="stats-val">38d</div></li>
+      </ul>
+    </div>
+    <div class="stats-block">
+      <div class="stats-block-header">🌟 <span>Top Ranked Teams</span></div>
+      <ul class="stats-list">
+        ${[...TEAMS].sort((a,b) => a.rank - b.rank).slice(0,8).map((t, i) => `
+          <li>
+            <div class="stats-rank ${rankClass(i)}">${i+1}</div>
+            <div class="stats-info"><strong>${t.flag} ${t.name}</strong><small>${t.conf}</small></div>
+            <div class="stats-val" style="font-size:0.85rem">FIFA #${t.rank}</div>
+          </li>`).join('')}
+      </ul>
+    </div>
+  `;
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const btns = document.querySelectorAll('.nav-links button');
+  const pageOrder = ['home', 'groups', 'schedule', 'teams', 'stats'];
+  btns[pageOrder.indexOf(id)].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderHomePage();
+renderGroups();
+renderSchedule();
+renderTeamsPage();
+renderStats();
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+name: Daily World Cup Briefing
+
+on:
+  schedule:
+    - cron: '0 11 * * *'   # 7:00 AM EDT (UTC-4) every day
+  workflow_dispatch:        # Also allow manual trigger from GitHub
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pytz
+
+      - name: Generate briefing
+        env:
+          WC_FOOTBALL_API_KEY: ${{ secrets.WC_FOOTBALL_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate_briefing.py
+
+      - name: Publish to GitHub Pages
+        run: |
+          git config user.name  "World Cup Bot"
+          git config user.email "bot@github-actions.com"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Briefing $(date +'%Y-%m-%d')"
+          git push

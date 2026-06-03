@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>גביע העולם 2026 · סיכום בוקר · 2026-06-03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+  --bg: #060911;
+  --surf: #0d1421;
+  --surf2: #131e2f;
+  --surf3: #1a2740;
+  --border: #1e2e45;
+  --gold: #f5c518;
+  --gold2: #e8a800;
+  --red: #e63946;
+  --blue: #3a86ff;
+  --green: #06d6a0;
+  --text: #e2e8f4;
+  --muted: #5a6a82;
+  --radius: 16px;
+  --font: 'Heebo', 'Arial Hebrew', Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { direction: rtl; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  min-height: 100vh;
+  line-height: 1.65;
+}
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── TOP BAR ──────────────────────────────────────────── */
+.top-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(6,9,17,.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 62px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.15rem; font-weight: 900; letter-spacing: -0.3px;
+}
+.logo-ball { font-size: 1.5rem; }
+.logo-title span { color: var(--gold); }
+.top-meta {
+  display: flex; align-items: center; gap: 14px;
+  font-size: .8rem; color: var(--muted);
+}
+.live-dot {
+  width: 7px; height: 7px; background: var(--red);
+  border-radius: 50%; animation: blink 1.4s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ── PAGE ─────────────────────────────────────────────── */
+.page-wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 80px; }
+
+/* ── DATE HERO ────────────────────────────────────────── */
+.date-hero {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 40px 40px 36px;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #080d1c 0%, #140820 60%, #08101c 100%);
+}
+.date-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(245,197,24,.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(58,134,255,.12) 0%, transparent 50%);
+}
+.date-hero-inner { position: relative; }
+.date-label { font-size: .75rem; font-weight: 800; text-transform: uppercase;
+              letter-spacing: 1.5px; color: var(--gold); margin-bottom: 10px; }
+.date-hero h1 { font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 900; line-height: 1.1; }
+.date-hero h1 .date-colored { color: var(--gold); }
+.date-hero p { color: var(--muted); margin-top: 6px; font-size: 1rem; }
+.match-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px;
+  background: rgba(245,197,24,.1);
+  border: 1px solid rgba(245,197,24,.3);
+  color: var(--gold); padding: 7px 16px;
+  border-radius: 30px; font-size: .85rem; font-weight: 700;
+}
+
+/* ── QUICK NAV ────────────────────────────────────────── */
+.quick-nav { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+.qn-pill {
+  background: var(--surf); border: 1px solid var(--border);
+  color: var(--muted); padding: 8px 18px; border-radius: 30px;
+  font-size: .83rem; font-weight: 700; cursor: pointer;
+  transition: all .2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.qn-pill:hover { border-color: var(--gold); color: var(--text); background: var(--surf2); text-decoration: none; }
+.qn-flag { font-size: 1rem; }
+
+/* ── PREVIEW BANNER ───────────────────────────────────── */
+.preview-banner {
+  background: linear-gradient(135deg, rgba(245,197,24,.08), rgba(58,134,255,.08));
+  border: 1px solid rgba(245,197,24,.35);
+  border-radius: var(--radius); padding: 20px 28px;
+  margin-bottom: 24px;
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.preview-label { font-size: .8rem; font-weight: 800; color: var(--gold);
+                 text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.preview-date  { font-size: 1.1rem; font-weight: 900; }
+.countdown-boxes { display: flex; align-items: center; gap: 8px; }
+.cd-box { text-align: center; }
+.cd-num { display: block; font-size: 1.8rem; font-weight: 900; color: var(--gold);
+          line-height: 1; min-width: 2ch; }
+.cd-lbl { font-size: .62rem; color: var(--muted); text-transform: uppercase;
+          letter-spacing: .8px; }
+.cd-sep { font-size: 1.5rem; color: var(--border); line-height: 1;
+          margin-bottom: 14px; }
+
+/* ── REFRESH BAR ──────────────────────────────────────── */
+.refresh-bar {
+  background: rgba(58,134,255,.07);
+  border: 1px solid rgba(58,134,255,.2);
+  border-radius: 10px; padding: 11px 18px;
+  margin-bottom: 24px; font-size: .82rem;
+  color: var(--muted); display: flex; align-items: center; gap: 8px;
+}
+
+/* ── MATCH CARD ───────────────────────────────────────── */
+.match-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  overflow: hidden;
+  background: var(--surf);
+  box-shadow: 0 8px 40px rgba(0,0,0,.5);
+}
+
+/* ── MATCH HERO ───────────────────────────────────────── */
+.match-hero {
+  position: relative; overflow: hidden;
+  padding: 32px 32px 24px;
+  background: linear-gradient(160deg, #0a1220 0%, #0d1830 100%);
+  border-bottom: 1px solid var(--border);
+}
+.hero-bg-left {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 50%; pointer-events: none;
+}
+.hero-bg-right {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 50%; pointer-events: none;
+}
+.stage-pill {
+  position: relative;
+  display: inline-block;
+  background: rgba(245,197,24,.12);
+  border: 1px solid rgba(245,197,24,.3);
+  color: var(--gold);
+  font-size: .72rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1px;
+  padding: 4px 12px; border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.scoreline-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.team-hero { display: flex; align-items: center; gap: 14px; }
+.team-hero.away-team { flex-direction: row-reverse; justify-content: flex-start; }
+
+.team-flag-giant img {
+  width: 80px; height: 54px;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,.6));
+  flex-shrink: 0;
+}
+
+.team-info-block {}
+.team-info-block.away-info { text-align: right; }
+.team-name-he { font-size: 1.5rem; font-weight: 900; line-height: 1.1; }
+.team-name-en { font-size: .78rem; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+/* SCORE BOXES */
+.score-box {
+  text-align: center; min-width: 110px;
+  border-radius: 12px; padding: 14px 18px;
+  flex-shrink: 0;
+}
+.score-box.upcoming {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.score-box.upcoming span:first-child { font-size: 1.1rem; font-weight: 800; color: var(--gold); }
+.kick-date { font-size: .7rem; color: var(--muted); }
+.score-box.live {
+  background: rgba(230,57,70,.12);
+  border: 1px solid rgba(230,57,70,.4);
+  color: var(--red); font-size: 1rem; font-weight: 800;
+  animation: blink .9s infinite;
+}
+.score-box.finished {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  font-size: 2rem; font-weight: 900;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.score-sep { color: var(--muted); font-weight: 300; }
+
+.match-footer-meta {
+  position: relative;
+  font-size: .8rem; color: var(--muted);
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.meta-sep { color: var(--border); }
+
+/* ── TABS ─────────────────────────────────────────────── */
+.tab-bar {
+  display: flex; flex-direction: row-reverse;
+  border-bottom: 1px solid var(--border);
+  background: var(--surf2);
+  overflow-x: auto;
+}
+.tab {
+  background: none; border: none;
+  color: var(--muted); padding: 14px 22px;
+  cursor: pointer; font-size: .85rem; font-weight: 700;
+  white-space: nowrap; font-family: var(--font);
+  border-bottom: 2px solid transparent;
+  transition: all .18s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+.tab-panel { display: none; padding: 28px 32px; }
+.tab-panel.active { display: block; }
+
+/* ── BRIEFING CONTENT ─────────────────────────────────── */
+.briefing-body h3.sec-title {
+  font-size: 1rem; font-weight: 800; color: var(--gold);
+  margin: 26px 0 10px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+}
+.briefing-body h3.sec-title:first-child { margin-top: 0; }
+.briefing-body h4 { font-size: .9rem; font-weight: 700; color: #8ab4e8; margin: 14px 0 6px; }
+.briefing-body p { font-size: .93rem; margin-bottom: 10px; color: var(--text); }
+.briefing-body ul.brief-list {
+  padding-right: 20px; padding-left: 0; margin-bottom: 10px;
+  list-style: none;
+}
+.briefing-body ul.brief-list li {
+  font-size: .9rem; margin-bottom: 6px; color: var(--text);
+  padding-right: 14px; position: relative;
+}
+.briefing-body ul.brief-list li::before {
+  content: '◆'; position: absolute; right: 0;
+  color: var(--gold); font-size: .55rem; top: 6px;
+}
+.briefing-body strong { color: #cde4ff; }
+.briefing-body em { color: var(--muted); font-style: normal; }
+
+/* ── STANDINGS ────────────────────────────────────────── */
+.s-group { margin-bottom: 24px; }
+.s-group-name {
+  font-size: .72rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--gold); margin-bottom: 10px;
+}
+.s-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.s-table th {
+  color: var(--muted); font-weight: 700; font-size: .65rem;
+  text-transform: uppercase; padding: 7px 5px;
+  border-bottom: 1px solid var(--border); text-align: center;
+  white-space: nowrap;
+}
+.s-table th.col-rank { width: 30px; }
+.s-table th.col-team { text-align: right; min-width: 110px; }
+.s-table td {
+  padding: 8px 5px; border-bottom: 1px solid rgba(30,46,69,.5);
+  text-align: center; vertical-align: middle;
+}
+.s-table td.col-rank { width: 30px; text-align: center; }
+.s-table td.col-team {
+  text-align: right;
+  white-space: nowrap;
+}
+.s-table tr:hover td { background: var(--surf3); }
+
+/* rank badge */
+.rank-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  font-size: .75rem; font-weight: 800;
+  background: var(--surf2); color: var(--muted);
+}
+.rank-num.rank-gold   { background: rgba(245,197,24,.2);  color: var(--gold); }
+.rank-num.rank-silver { background: rgba(180,180,180,.15); color: #c0c0c0; }
+.rank-num.rank-bronze { background: rgba(160,100,50,.2);  color: #cd7f32; }
+
+/* team name cell — flag + name inline, RTL friendly */
+.team-cell-inner {
+  display: inline-flex; align-items: center; gap: 6px;
+  direction: rtl;
+}
+.t-flag img { border-radius: 2px; vertical-align: middle; flex-shrink: 0; }
+.t-name { font-weight: 600; }
+
+/* qualify indicators */
+.s-table tr.qualify td.col-team { border-right: 3px solid var(--green); padding-right: 8px; }
+.s-table tr.third   td.col-team { border-right: 3px solid var(--blue);  padding-right: 8px; }
+.s-legend {
+  display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap;
+}
+.s-legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .73rem; color: var(--muted);
+}
+.s-legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+/* ── RESULTS ──────────────────────────────────────────── */
+.res-grid { display: flex; flex-wrap: wrap; gap: 14px; }
+.res-card {
+  flex: 1; min-width: 175px;
+  background: var(--surf2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px; text-align: center;
+}
+.res-stage { font-size: .66rem; color: var(--gold); font-weight: 800;
+             text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+.res-matchup { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.res-team { font-size: .82rem; font-weight: 700; }
+.res-score { font-size: 1.45rem; font-weight: 900; padding: 0 6px; }
+.res-date { font-size: .7rem; color: var(--muted); margin-top: 6px; }
+
+/* ── NEWS ─────────────────────────────────────────────── */
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) { .news-grid { grid-template-columns: 1fr; } }
+.news-card {
+  background: var(--surf2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px;
+  text-decoration: none; display: block;
+  transition: border-color .18s, transform .15s;
+}
+.news-card:hover { border-color: var(--gold); transform: translateY(-2px); text-decoration: none; }
+.news-source {
+  font-size: .68rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .8px; margin-bottom: 6px; padding: 2px 8px;
+  border-radius: 4px; display: inline-block;
+}
+.src-sport5  { background: rgba(255,60,0,.15); color: #ff6a3c; }
+.src-one     { background: rgba(0,120,255,.15); color: #4a9eff; }
+.src-google  { background: rgba(100,100,100,.15); color: var(--muted); }
+.news-title { font-size: .9rem; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
+.news-desc  { font-size: .78rem; color: var(--muted); margin-bottom: 4px; }
+.news-pub   { font-size: .7rem; color: var(--muted); }
+
+/* ── NO MATCHES ───────────────────────────────────────── */
+.no-matches { text-align: center; padding: 70px 20px; }
+.no-matches-emoji { font-size: 3.5rem; margin-bottom: 16px; }
+.no-matches h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+.no-matches p { color: var(--muted); }
+
+/* ── MISC ─────────────────────────────────────────────── */
+.muted-he { color: var(--muted); font-size: .9rem; }
+code { background: var(--surf2); padding: 2px 6px; border-radius: 4px; font-size: .82rem; }
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .scoreline-row { grid-template-columns: 1fr; gap: 10px; }
+  .team-hero, .team-hero.away-team { justify-content: center; }
+  .team-flag-giant img { width: 56px; height: 38px; }
+  .team-name-he { font-size: 1.2rem; }
+  .team-info-block.away-info { text-align: center; }
+  .tab-panel { padding: 20px 16px; }
+  .match-hero { padding: 24px 16px 18px; }
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">
+    <span class="logo-ball">⚽</span>
+    <div class="logo-title">FIFA <span>2026</span> &nbsp;·&nbsp; סיכום בוקר</div>
+  </div>
+  <div class="top-meta">
+    <div class="live-dot"></div>
+    <span>עודכן 3:07 PM ET</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="date-hero">
+    <div class="date-hero-inner">
+      <div class="date-label">🌅 סיכום בוקר יומי</div>
+      <h1>בוקר טוב ☀️ — <span class="date-colored">רביעי, 3 ביוני 2026</span></h1>
+      <p>תצוגה מקדימה למשחקים הבאים</p>
+      <div class="match-pill">⏰ בעוד 8 ימים: 1 משחקים</div>
+    </div>
+  </div>
+
+  
+<div class="preview-banner">
+  <div class="preview-left">
+    <div class="preview-label">🏆 גביע העולם מתחיל בקרוב</div>
+    <div class="preview-date">Thursday, June 11</div>
+  </div>
+  <div class="countdown-boxes">
+    <div class="cd-box"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">ימים</span></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-box"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">שעות</span></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-box"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">דקות</span></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-box"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">שניות</span></div>
+  </div>
+</div>
+
+  <div class="refresh-bar">
+    🔄 הסיכום נוצר אוטומטית בכל בוקר בשעה 07:00. הרץ <code>generate_briefing.py</code> לרענון ידני.
+  </div>
+
+  <nav class="quick-nav"><a class="qn-pill" href="#m-Mex-Sou">מקסיקו נגד דרום אפריקה</a></nav>
+  
+<article class="match-card" id="m-Mex-Sou">
+
+  <!-- HERO HEADER with team colors -->
+  <div class="match-hero" style="--c1:#006847;--c2:#007a4d">
+    <div class="hero-bg-left"  style="background:linear-gradient(120deg,#00684755,transparent)"></div>
+    <div class="hero-bg-right" style="background:linear-gradient(240deg,#007a4d55,transparent)"></div>
+
+    <div class="stage-pill">שלב הבתים · בית GROUP_A</div>
+
+    <div class="scoreline-row">
+
+      <div class="team-hero home-team">
+        <div class="team-flag-giant"><img src="https://flagcdn.com/w40/mx.png" width="72" height="48" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="mx" loading="lazy"></div>
+        <div class="team-info-block">
+          <div class="team-name-he">מקסיקו</div>
+          <div class="team-name-en">Mexico</div>
+        </div>
+      </div>
+
+      <div class="score-box upcoming"><span>3:00 PM ET</span><span class="kick-date">June 11, 2026</span></div>
+
+      <div class="team-hero away-team">
+        <div class="team-info-block away-info">
+          <div class="team-name-he">דרום אפריקה</div>
+          <div class="team-name-en">South Africa</div>
+        </div>
+        <div class="team-flag-giant"><img src="https://flagcdn.com/w40/za.png" width="72" height="48" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="za" loading="lazy"></div>
+      </div>
+
+    </div>
+
+    <div class="match-footer-meta">
+      <span>📍 </span>
+      <span class="meta-sep">·</span>
+      <span>🕐 3:00 PM ET</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab(this,'m-Mex-Sou-brief')">📋 ניתוח המשחק</button>
+    <button class="tab" onclick="switchTab(this,'m-Mex-Sou-stand')">📊 טבלת הבית</button>
+    <button class="tab" onclick="switchTab(this,'m-Mex-Sou-res')">🏆 תוצאות הטורניר</button>
+    <button class="tab" onclick="switchTab(this,'m-Mex-Sou-news')">📰 חדשות</button>
+  </div>
+
+  <div id="m-Mex-Sou-brief" class="tab-panel active">
+    <div class="briefing-body"><p># 🌍 גביע העולם 2026 | מקסיקו נגד דרום אפריקה</p>
+<p><strong>שלב הבתים — בית A | 15:00 ET</strong></p>
+<p>---</p>
+<h3 class="sec-title">⚡ הרקע למשחק</h3>
+<p>פתיחת הבית A מציבה בפני שתי הנבחרות הזדמנות נדירה להציג כרטיס ביקור חזק מול העולם — ניצחון פה יכול לתת פלטפורמת ביטחון לכל שאר שלב הבתים. עבור מקסיקו, המשחק הוא גם הזדמנות לשבור את "קללת השמינית" המפורסמת ולהראות כי הם מגיעים עם שאיפות שונות הפעם. דרום אפריקה, שמתחרה בגביע העולם לאחר הפסקה ממושכת, יודעת שכל נקודה בשלב הבתים שוות זהב בדרך לשלב הנוקאאוט.</p>
+<p>---</p>
+<h3 class="sec-title">🔵 מקסיקו — פרופיל קבוצה</h3>
+<ul class="brief-list">
+<li><strong>מאמן</strong>: חאבייר אגירה (מקסיקו) — בחזרה לתפקיד לאחר שני כהונות בעבר, מביא ניסיון בינלאומי עשיר וידע מעמיק של ה-DNA המקסיקני</li>
+<li><strong>מערך</strong>: 4-3-3 / 4-2-3-1 גמיש</li>
+</ul>
+<ul class="brief-list">
+<li><strong>שחקנים מרכזיים</strong>:</li>
+</ul>
+<p>  - <strong>גיום נבסקי</strong> — Club América — קישור מרכזי — מנוע הקבוצה, מחלק כדורים ומסוגל להגיע לאזורי הסיום</p>
+<p>  - <strong>סנטיאגו חימנז</strong> — Feyenoord — חלוץ מרכזי — אחד הכוחות ההתקפיים הגדולים של יבשת אמריקה, הבקעה היא הכרטיס שלו</p>
+<p>  - <strong>אדסון אלבארז</strong> — West Ham United — קישור הגנתי — הסכין השוויצרי של הנבחרת, חוסם ומפעיל בו-זמנית</p>
+<p>  - <strong>חוליו-סזאר דומינגז</strong> — Cruz Azul — מגן ימני — קדמת ההגנה עם יכולת בפריצות לאורך הקו</p>
+<p>  - <strong>אורבלין פינדה</strong> — Tigres UANL — כנף שמאל — מהיר, מסוכן, מסוגל ליצור בעיות רציניות מהצד</p>
+<ul class="brief-list">
+<li><strong>סגנון משחק</strong>: מקסיקו מחזיקה בכדור, בונה בסבלנות מהגב ומחפשת לנצל מרחבים בנגד-התקפות. הפרסינג הגבוה חוזר תחת אגירה, ומקנה לקבוצה אופי אגרסיבי יותר.</li>
+</ul>
+<ul class="brief-list">
+<li><strong>חוזקה בולטת</strong>: עומק ואיכות בקו האמצע — שלושה קישורים ברמה גבוהה שיכולים לשלוט בקצב המשחק</li>
+<li><strong>חולשה בולטת</strong>: הגנה גבוהה שיכולה להיות פגיעה לכדורים מאחורי הקו מול קבוצות עם מהירות</li>
+</ul>
+<p>---</p>
+<h3 class="sec-title">🔴 דרום אפריקה — פרופיל קבוצה</h3>
+<ul class="brief-list">
+<li><strong>מאמן</strong>: הוגו בראוס (דרום אפריקה) — מאמן ותיק שבנה את הבניאן-בויס מחדש, מדגיש משמעת טקטית ורוח קבוצתית</li>
+<li><strong>מערך</strong>: 4-1-4-1 / 5-4-1 מגן</li>
+</ul>
+<ul class="brief-list">
+<li><strong>שחקנים מרכזיים</strong>:</li>
+</ul>
+<p>  - <strong>פרסי טאו</strong> — Al-Ahli (ערב הסעודית) — כנף / פנימי — הכוכב המבוסס ביותר, שחקן יצירתי ואיש הכיפים של הנבחרת</p>
+<p>  - <strong>ת׳אנדיווה צ׳וני</strong> — מועדון מקומי / ליגה אפריקאית — קישור הגנתי — הצמד-ומוץ של האמצע, שומר על הסדר מאחורי הכדור</p>
+<p>  - <strong>ספרינגבוק מולופי</strong> — Mamelodi Sundowns — חלוץ — עבודה קשה, ריצות לעומק, יכולת להחזיק כדורים בלחץ</p>
+<p>  - <strong>ביפו לזולא</strong> — SuperSport United — מגן שמאלי — מגן שמנצל נכח התקפי בבניית המשחק</p>
+<p>  - <strong>רונווין ויליאמס</strong> — Kaizer Chiefs — שוער — מגיש ביטחון לאחור עם רפלקסים חדים</p>
+<ul class="brief-list">
+<li><strong>סגנון משחק</strong>: דרום אפריקה נסמכת על קומפקטיות הגנתית, נגד-התקפות מהירות ועבודה קבוצתית של 90 דקות. פאוסי טאו הוא הגורם שיכול לשבש כל תוכנית.</li>
+</ul>
+<ul class="brief-list">
+<li><strong>חוזקה בולטת</strong>: ארגון הגנתי קפדני — קשה מאוד לפרק אותם ממצב מאורגן</li>
+<li><strong>חולשה בולטת</strong>: עוצמה התקפית מוגבלת — תלות גבוהה בטאו לביצוע האיכותי</li>
+</ul>
+<p>---</p>
+<h3 class="sec-title">📋 הרכבים צפויים</h3>
+<p><strong>מקסיקו (4-3-3):</strong></p>
+<p>שוער — גונסאלס</p>
+<p>הגנה — ורגס | מורנו | מונטס | דומינגז</p>
+<p>קישור — אלבארז | צ׳אבז | נבסקי</p>
+<p>התקפה — פינדה | חימנז | אנטונה</p>
+<p><strong>דרום אפריקה (4-1-4-1):</strong></p>
+<p>שוער — ויליאמס</p>
+<p>הגנה — מוקוינה | שלא | אנדיאה | לזולא</p>
+<p>קישור — צ׳וני (עוגן) | מוכתשי | מוהאפי | דה ריוק</p>
+<p>כנף — טאו</p>
+<p>חלוץ — מולופי</p>
+<p>---</p>
+<h3 class="sec-title">⚔️ קרבות טקטיים מרכזיים</h3>
+<p><strong>1. 🔥 סנטיאגו חימנז נגד הציר המרכזי של ההגנה הדרום-אפריקאית (שלא + אנדיאה)</strong></p>
+<p>חימנז הוא חלוץ ברמה אירופאית שמוכיח את עצמו בפנייה ובסמוך לשער. אם ההגנה הדרום-אפריקאית תאפשר לו פנייה על ימין, כל המצב יהפוך למסוכן מאוד. בניסיון לבלום אותו פיזית, הם עלולים לקבל קיק ישיר מסוכן.</p>
+<p><strong>2. ⚡ פרסי טאו נגד חוליו-סזאר דומינגז (מגן ימני מקסיקאי)</strong></p>
+<p>טאו נוהג לרוץ לתוך המרחב בין הקווים ולהסתנן מהצד השמאלי. דומינגז, שאוהב לצאת קדימה, עלול להשאיר חלל שטאו ינצל. זה העימות שיכתיב את קצב המשחק ההתקפי של בניאן-בויס.</p>
+<p><strong>3. 🧠 אדסון אלבארז נגד ת׳אנדיווה צ׳וני — מלחמת שליטה באמצע</strong></p>
+<p>שני הקישורים ההגנתיים, שניהם בנויים לנצח ב"קרב על הארץ" באמצע המגרש. מי שיזכה בדו-קרב הזה יקבוע את הנרטיב — האם מקסיקו תשחק קדימה בנוחות, או שדרום-אפריקה תיצור כאוס.</p>
+<p>---</p>
+<h3 class="sec-title">📜 היסטוריה בגביע העולם</h3>
+<p>שתי הנבחרות לא נפגשו בעבר בגביע העולם, מה שהופך את המשחק הזה לבכורה היסטורית. אולם ישנם כמה הקשרים מרתקים:</p>
+<ul class="brief-list">
+<li><strong>מקסיקו</strong> — עם 17 השתתפויות בגביע העולם, היא הנבחרת עם הרצף הארוך ביותר בעולם של הגעה לשלב הנוקאאוט (שמינית הגמר) ל-7 מונדיאלים רצופים, אך מעולם לא עברה לרבע גמר. "אל קוינטו פארטידו" — המשחק החמישי הנכסף — נותר חלום. גיבורים כמו הוגו סנצ׳ז, ראול ל</li>
+</ul></div>
+  </div>
+  <div id="m-Mex-Sou-stand" class="tab-panel">
+    <div class="s-group"><div class="s-group-name">בית Group A</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/cz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="cz" loading="lazy"></span><span class="t-name">צ'כיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/mx.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="mx" loading="lazy"></span><span class="t-name">מקסיקו</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/za.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="za" loading="lazy"></span><span class="t-name">דרום אפריקה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/kr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="kr" loading="lazy"></span><span class="t-name">קוריאה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group B</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ba.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ba" loading="lazy"></span><span class="t-name">בוסניה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ca.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ca" loading="lazy"></span><span class="t-name">קנדה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/qa.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="qa" loading="lazy"></span><span class="t-name">קטר</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ch.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ch" loading="lazy"></span><span class="t-name">שוויץ</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group C</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/br.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="br" loading="lazy"></span><span class="t-name">ברזיל</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ma.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ma" loading="lazy"></span><span class="t-name">מרוקו</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ht.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ht" loading="lazy"></span><span class="t-name">האיטי</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/gb-sct.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="gb-sct" loading="lazy"></span><span class="t-name">סקוטלנד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group D</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/tr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="tr" loading="lazy"></span><span class="t-name">טורקיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/us.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="us" loading="lazy"></span><span class="t-name">ארה"ב</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/py.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="py" loading="lazy"></span><span class="t-name">פרגוואי</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/au.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="au" loading="lazy"></span><span class="t-name">אוסטרליה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group E</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/de.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="de" loading="lazy"></span><span class="t-name">גרמניה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">Curaçao</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ci.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ci" loading="lazy"></span><span class="t-name">חוף השנהב</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ec.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ec" loading="lazy"></span><span class="t-name">אקוודור</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group F</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">שוודיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/nl.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="nl" loading="lazy"></span><span class="t-name">הולנד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/jp.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="jp" loading="lazy"></span><span class="t-name">יפן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/tn.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="tn" loading="lazy"></span><span class="t-name">תוניסיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group G</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/be.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="be" loading="lazy"></span><span class="t-name">בלגיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/eg.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="eg" loading="lazy"></span><span class="t-name">מצרים</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ir.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ir" loading="lazy"></span><span class="t-name">איראן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/nz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="nz" loading="lazy"></span><span class="t-name">ניו זילנד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group H</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/es.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="es" loading="lazy"></span><span class="t-name">ספרד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/de.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="de" loading="lazy"></span><span class="t-name">גרמניה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/sa.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="sa" loading="lazy"></span><span class="t-name">ערב הסעודית</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/uy.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="uy" loading="lazy"></span><span class="t-name">אורוגוואי</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group I</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/iq.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="iq" loading="lazy"></span><span class="t-name">עיראק</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/fr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="fr" loading="lazy"></span><span class="t-name">צרפת</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/sn.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="sn" loading="lazy"></span><span class="t-name">סנגל</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">נורווגיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group J</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ar.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ar" loading="lazy"></span><span class="t-name">ארגנטינה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/dz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="dz" loading="lazy"></span><span class="t-name">אלגריה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/at.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="at" loading="lazy"></span><span class="t-name">אוסטריה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/jo.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="jo" loading="lazy"></span><span class="t-name">ירדן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group K</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/co.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="co" loading="lazy"></span><span class="t-name">קולומביה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/pt.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="pt" loading="lazy"></span><span class="t-name">פורטוגל</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/uz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="uz" loading="lazy"></span><span class="t-name">אוזבקיסטן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/co.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="co" loading="lazy"></span><span class="t-name">קולומביה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group L</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">אנגליה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/hr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="hr" loading="lazy"></span><span class="t-name">קרואטיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/gh.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="gh" loading="lazy"></span><span class="t-name">גאנה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/pa.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="pa" loading="lazy"></span><span class="t-name">פנמה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div>
+  </div>
+  <div id="m-Mex-Sou-res" class="tab-panel">
+    <p class="muted-he">אין תוצאות עדיין בטורניר זה.</p>
+  </div>
+  <div id="m-Mex-Sou-news" class="tab-panel">
+    <div class="news-grid"><a class="news-card" href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5GbF8wNkdYWDZzWmNwUUdJVDR6SkZjbE5fQ3Z2cW1LNGN3Y2o5bFN3eUpGb3gxZlVQeDk2My10WlhLQWdRcUNoQjRfUzJ5UkVlRU9PZURMNF9DNy1NVzFBSDd2Qk1wZGdnaVpKWV85Ym82WUJ0b3pocg?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">לוח המשחקים האחרון של בית א' בגביע העולם 2026</div>
+  <div class="news-desc">לוח המשחקים האחרון של בית א' בגביע העולם 2026&nbsp;&nbsp;Vietnam.vn</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMid0FVX3lxTFBFX1c1NEJVV3dvQkFWUHV4UVBOYmFONm45eHhLRHNVWW1heU5RN0NIbms4R3hfT1Q5VGdFNEVwNkZpck5iVl9scDZXNFE2Z3RRWjBNRlRnWEZLN1FPR3RwWVVHVHZZS3ZmRXdhSFFxT3VjcXlIX1RB?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">מונדיאל 2026: לוח משחקים מלא, בתים וטבלאות דירוג</div>
+  <div class="news-desc">מונדיאל 2026: לוח משחקים מלא, בתים וטבלאות דירוג&nbsp;&nbsp;mako</div>
+  <div class="news-pub">Sun, 31 May 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMibEFVX3lxTE51a0poeVZNcmZEYUpWV3RQWFVSQWpoeS1iWnFJeUFVaHllaWhkQnRZRU8xdnR5MU1vX3ZSaGtkLVJYVFd2aElpZXNoOWZKVEVuSThTY1pjb1Z0d2xxWGtuTHgxZmEzRWtRQXM1QQ?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">הכי רועש, הכי שקול: המדריך לבית 1 במונדיאל 2026</div>
+  <div class="news-desc">הכי רועש, הכי שקול: המדריך לבית 1 במונדיאל 2026&nbsp;&nbsp;ynet</div>
+  <div class="news-pub">Tue, 02 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQWVdfZmYyem1oTVlUbG1qbUpmLVdpWXRHbnJLS21PLUVDc1Y5ZmFjdjJLcmFTQmU5MWFqM1doMkFBTk9TZzNUY3RXOXNyd2MxMHlMNjRORUI0UkNoX1F6UVhqQlZ1eDBjdEZ1OTAyRWJ4cDZkQ2tkZkVwNXREcTNuWU01bklvYkFZUlRHSmxwMFhhWndST3Rj?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">מונדיאל 2026: משחקי שלב הבתים שאסור לכם לפספס</div>
+  <div class="news-desc">מונדיאל 2026: משחקי שלב הבתים שאסור לכם לפספס&nbsp;&nbsp;ספורט 1</div>
+  <div class="news-pub">Sun, 31 May 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxNazBRZDFsYjkyM1lXUGRBZzU2c3FfaHdOTWNtTUZGMWZhR1FCdDd1LTJ5U0VBN1FHbFZWRndrMzZVUTNGUFZqa3A5U3pLT1lreXNMZllmU2pPQUFFOGhCTEJoZHlnWFM3VU1xM0ZxNWJiZG4zMTA5OTZqQUlzUGp3Zm1tSXpWeGViTEFvdUVaaTgtcVdUTnZqX2F3eFdKWnNsTHBFRUl3OVVxTF91TE5udTZlNVF5UTFoU2hpdjJjSDdKZE5JNV9XNENMS290NWtu?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">2026 FIFA World Cup match schedule: All fixtures and results</div>
+  <div class="news-desc">2026 FIFA World Cup match schedule: All fixtures and results&nbsp;&nbsp;ESPN</div>
+  <div class="news-pub">Tue, 02 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMif0FVX3lxTE96UEJMYV9DNUdVdEtIaTVobEJBa041bVFNaUxNcGVCYy1jVUlfRWFZVFpxdXB2TWkyU3NZd3NqcWZsNTU1ZmI1NHFQVldaOVQ0Qmg4eFcxcFR4dV9IZ2ktMGROUGljb3F5cFFlUTduUHh1cXlDMXEya293Q0o1SzQ?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">World Cup 2026: Group A Predictions and Preview</div>
+  <div class="news-desc">World Cup 2026: Group A Predictions and Preview&nbsp;&nbsp;Opta Analyst</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQbVprNHliZFlQNEtYRTJrQktXaHBDX0pRMEJLMlFfSDg2ODREbElfbUo2Z09ENGQwMUZGZnJHWlk1N1FpaEFtS3FhamZ2NGNoSVd3dW4wakNGSEpaSklfX0dpTDd0bmN5TFMtRzktTjQtVGlhQ0RhYjdVdW5xQ2QzOHB2Vno3Y2oyZEl1YzNGb21nZVdUbnpXQmNJRndydjVQTUdoVTNTR3pKMEJzR3fSAbMBQVVfeXFMTnpYZGN4NFo0akhrUDdiMjEzMHR3MTNSVTRWRjZ1RWY0cDlqcTF4Y3ByMnBXeDd1bXc3NnBidFQxWHl3LXpoQXJNbFVIcGhRcm4zYmRJY2VaNG1oNDRscHBpR1hhcFNLTkF6NnRMTzlLUDNIQUZEVmQ4MEZwdEJqRVBNMmZ0M0hNMFhPLWg0TDFGdW1kODI1ZnpseV82U0J2aC1QcGNWZzZOLVhXcno0ZS1GcDA?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">South Africa’s World Cup delegation departs for Mexico without coach</div>
+  <div class="news-desc">South Africa’s World Cup delegation departs for Mexico without coach&nbsp;&nbsp;Al Jazeera</div>
+  <div class="news-pub">Tue, 02 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMihgJBVV95cUxPWE1TLWVSUDhDX1RvWndXa2tuMHBCWmJZaGNQSUlIRDBkdXhSME80RkRHNW9WUlBmUHF1Y2RWQ2lrRjBfUThjbWk3cmtnZUZiVDE5dUdvVHV0R0NuYzNPMlgzczB0X3lqQXI0RC1taUc1SlZSWmI5djJHck44Q05uR0lVdGQ5X0xiNm9uVFNPa0RFRE45YmxSTW1iR0RhT0EyaG5rcXlTVC0tSUdBQy1VRFk5OUNtWDVROU45dzhnZ2JGNTdiT0RFM0sxQmgzazNRdHBIV0JyeDdKYkpvMk9vV1hKcWhWSlFja2gtRGNIcllDcnl6NzAtN1lkdkstTXBvMEFaV2Nn?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">World Cup Group A fixtures</div>
+  <div class="news-desc">World Cup Group A fixtures&nbsp;&nbsp;Sky Sports</div>
+  <div class="news-pub">Tue, 02 Jun 2026</div>
+</a></div>
+  </div>
+
+</article>
+  
+<section class="match-card" style="padding:0;margin-bottom:28px;">
+  <div style="padding:20px 28px 16px;background:var(--surf2);border-bottom:1px solid var(--border);
+              font-size:1rem;font-weight:800;">
+    📰 חדשות <span style="color:var(--gold)">גביע העולם 2026</span>
+  </div>
+  <div style="padding:20px 28px;">
+    <div class="news-grid"><a class="news-card" href="https://news.google.com/rss/articles/CBMid0FVX3lxTFBPcXJfQlNWY01Qd2tWRXAwVlJyLUFrUDZsVm55VDhkd3I5NGJhamJuS08zZkUzMFhjSV85OXlXd3RDQjhBaEZQczF4OGYtQ2dyRFk5RUdOTmQtMFBoTWl0V2g2VzlFTVVwd2EwZVIyalc3NzgweE00?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">מונדיאל 2026: איך עובד טורניר עם 48 נבחרות</div>
+  <div class="news-desc">מונדיאל 2026: איך עובד טורניר עם 48 נבחרות&nbsp;&nbsp;מקור ראשון</div>
+  <div class="news-pub">Tue, 02 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMid0FVX3lxTFBFX1c1NEJVV3dvQkFWUHV4UVBOYmFONm45eHhLRHNVWW1heU5RN0NIbms4R3hfT1Q5VGdFNEVwNkZpck5iVl9scDZXNFE2Z3RRWjBNRlRnWEZLN1FPR3RwWVVHVHZZS3ZmRXdhSFFxT3VjcXlIX1RB?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">מונדיאל 2026: לוח משחקים מלא, בתים וטבלאות דירוג</div>
+  <div class="news-desc">מונדיאל 2026: לוח משחקים מלא, בתים וטבלאות דירוג&nbsp;&nbsp;mako</div>
+  <div class="news-pub">Sun, 31 May 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1Hc2RxYnRrbmQ0b0xCZmdHdkVMTzJyeTIyUWRkcGVMR2YxT21EQmViSG9pVjItQVBra0txcVhmU20wWU9mNGx6dm4xRUxBMGVQZTNHSF8tenpYQWpfeUxnOUV2OWgydUg5RVBROUdZcHJ0NUk?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">הכשרון יספיק? הפוטנציאל של צרפת ואמבפה</div>
+  <div class="news-desc">הכשרון יספיק? הפוטנציאל של צרפת ואמבפה&nbsp;&nbsp;ספורט 5</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5GbF8wNkdYWDZzWmNwUUdJVDR6SkZjbE5fQ3Z2cW1LNGN3Y2o5bFN3eUpGb3gxZlVQeDk2My10WlhLQWdRcUNoQjRfUzJ5UkVlRU9PZURMNF9DNy1NVzFBSDd2Qk1wZGdnaVpKWV85Ym82WUJ0b3pocg?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">לוח המשחקים האחרון של בית א' בגביע העולם 2026</div>
+  <div class="news-desc">לוח המשחקים האחרון של בית א' בגביע העולם 2026&nbsp;&nbsp;Vietnam.vn</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNU05YOGYxVWQ2V01BR1BJeGVpOHdtOVVNT0I2ZmsxNFhlVzYyb1Z2RWo3aEpJYlRUU2ZjNGJmRVFpM0NndEJaRmhfd1E3LUtEeUttQmhkRVF0Ny1VdnI2b1JQczFTOXNpWWI2R2Q2a3IxVjRYQVdzRjBxZ3BTWkJwdzUtN1hjeXNnWVNaaklrb1loSExRbWtN0gGcAUFVX3lxTE5Wd3pQeWtEQnRnY0FhRmROMG1xd1pycHJxeFpSMXgzNWx1bDJJS0VSUVRzNlg3THJNSFBtb01JcHRuRGYtcFItNWwyT2hpVGlIUWZWaDVMakFyc3VXMlAyUFc0d2xiNU5Nb054dUQzemF1S0hMY1NFVlBFNUk5YU9CTjJtNW5McFJzMFY1bW1rTHRUZDJfb0VPUnp5Rw?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">Who are the best young players to watch at FIFA World Cup 2026?</div>
+  <div class="news-desc">Who are the best young players to watch at FIFA World Cup 2026?&nbsp;&nbsp;Al Jazeera</div>
+  <div class="news-pub">Tue, 02 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9sSGZQZmtBMW45cUhxYmV4R1VGX2ctazJFWjNVdTQ4YnVBcFFZaHBhQVh0bGluaGRqaUxTRUk0QS13TU9lbkRXejI2T3pmQ3JQNGJocElFejBKOTZLVXptaXB3SFFkbXc?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">World Cup 2026: Who has the oldest players? Which leagues are most represented? Squads in numbers</div>
+  <div class="news-desc">World Cup 2026: Who has the oldest players? Which leagues are most represented? Squads in numbers&nbsp;&nbsp;BBC</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOUHVuMXN4d0twRFJiNnZMaXl0NGl3Nk82bVRpM1N4U1paa1JaZDdtdkhId3Z0V1NJaTZDbHhGRlRXNnZ1S2dOX0JDR2pCQ3RqMlh4U3dXYTZmcFFPOGZGU254bW9Kc29UVC1HaTZYM2owN0tSY0NsOGdNTTVyeF9YNzlGY1FDSUJ0ZEZaQjNkbktxTi1mX3BRc1owNGxmMThXVTktb3VIWi1MUFBpYlZ0MW4xR0txcmhxRWo1bDdidmhjMGYtYkNNSEhDWGdTcjJS?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">Campaign to deliver ‘biggest complaint Fifa has ever received’ launches before World Cup</div>
+  <div class="news-desc">Campaign to deliver ‘biggest complaint Fifa has ever received’ launches before World Cup&nbsp;&nbsp;The Guardian</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMiVkFVX3lxTFBld3E5X096TGU0UFlSRldranN2Q3RBNTlVWE1LbDFkeldTUkwybFZ6bW1WRzYzbW50MHlhem9OMkJCbTFLb05ObFZuS2k2UlBWcGVueDl3?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">Alexi Lalas speaks on the FIFA World Cup 2026</div>
+  <div class="news-desc">Alexi Lalas speaks on the FIFA World Cup 2026&nbsp;&nbsp;Fox News</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMic0FVX3lxTE1FU2tSa1BSY3FGekFDQ0VZVGtZWkxLcVBfcWNlVzBPWW41QWhIYzVLckRycTdNM2JiYWR3RllJNXJSVF9HR1RCVnpBc09IbnJ4YmVRZlBJS1Iwdk45bTBNd0RYM1FydXJpcU9pQW9Td3dTSW_SAXtBVV95cUxPekpIWnNMaVliQVN2Z3A0TmszZ053QjAtS0xmaVhvMVV4eDVUdDN5VjdLT2FUZkVhdXRZSGY3UWN2c2FqbGs4S3BrNXRmRnBZU2RSc3RXeHpaWnFlaFpEOHUtdXJodGZxQkhraFlYMkFmVWVyY083VlRneDQ?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">המדריך הציוני למונדיאל 2026: את מי לאהוד וממי להתרחק</div>
+  <div class="news-desc">המדריך הציוני למונדיאל 2026: את מי לאהוד וממי להתרחק&nbsp;&nbsp;היום</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a><a class="news-card" href="https://news.google.com/rss/articles/CBMizgFBVV95cUxQQmY4NjZYVzBzWWhDVVlkd1dRN3JocXVzWUJIempOZVh3aFcxc0NxLTk0Z2JKVEtKRUZDN1gtTEhaN2hIcC1KOUd1RVROeEhwd2hwNGpXTjRDby04UF9pQllJWEpBYmlUZ1lQUWw1RnBYb2p1NllsZ042b3VkUGtwR1BxUUwtVXVzekJ1TXNudmhvZUNfS2FZZkl2dmoxVEN0Y09ia0NhQ2MzeDl6OFB5NlUwVURWZnF2UUZZbE40VGJOOEwzdHRiUjAwcm9iZw?oc=5" target="_blank" rel="noopener">
+  <div class="news-source src-google">Google News</div>
+  <div class="news-title">פרטי לוח הזמנים של בית ג' של מונדיאל 2026: לברזיל יש סיכוי חזק להוביל, בעוד מרוקו, סקוטלנד והאיטי מתחרות על המקום הנותר?</div>
+  <div class="news-desc">פרטי לוח הזמנים של בית ג' של מונדיאל 2026: לברזיל יש סיכוי חזק להוביל, בעוד מרוקו, סקוטלנד והאיטי מתחרות על המקום הנותר?</div>
+  <div class="news-pub">Wed, 03 Jun 2026</div>
+</a></div>
+  </div>
+</section>
+  
+<section class="match-card" style="padding:28px 32px;margin-bottom:28px;">
+  <div style="font-size:1.05rem;font-weight:800;margin-bottom:20px;">
+    📊 טבלאות <span style="color:var(--gold)">כל הבתים</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:20px;">
+    <div class="s-group"><div class="s-group-name">בית Group A</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/cz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="cz" loading="lazy"></span><span class="t-name">צ'כיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/mx.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="mx" loading="lazy"></span><span class="t-name">מקסיקו</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/za.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="za" loading="lazy"></span><span class="t-name">דרום אפריקה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/kr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="kr" loading="lazy"></span><span class="t-name">קוריאה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group B</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ba.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ba" loading="lazy"></span><span class="t-name">בוסניה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ca.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ca" loading="lazy"></span><span class="t-name">קנדה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/qa.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="qa" loading="lazy"></span><span class="t-name">קטר</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ch.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ch" loading="lazy"></span><span class="t-name">שוויץ</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group C</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/br.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="br" loading="lazy"></span><span class="t-name">ברזיל</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ma.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ma" loading="lazy"></span><span class="t-name">מרוקו</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ht.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ht" loading="lazy"></span><span class="t-name">האיטי</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/gb-sct.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="gb-sct" loading="lazy"></span><span class="t-name">סקוטלנד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group D</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/tr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="tr" loading="lazy"></span><span class="t-name">טורקיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/us.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="us" loading="lazy"></span><span class="t-name">ארה"ב</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/py.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="py" loading="lazy"></span><span class="t-name">פרגוואי</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/au.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="au" loading="lazy"></span><span class="t-name">אוסטרליה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group E</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/de.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="de" loading="lazy"></span><span class="t-name">גרמניה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">Curaçao</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ci.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ci" loading="lazy"></span><span class="t-name">חוף השנהב</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ec.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ec" loading="lazy"></span><span class="t-name">אקוודור</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group F</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">שוודיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/nl.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="nl" loading="lazy"></span><span class="t-name">הולנד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/jp.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="jp" loading="lazy"></span><span class="t-name">יפן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/tn.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="tn" loading="lazy"></span><span class="t-name">תוניסיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group G</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/be.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="be" loading="lazy"></span><span class="t-name">בלגיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/eg.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="eg" loading="lazy"></span><span class="t-name">מצרים</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ir.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ir" loading="lazy"></span><span class="t-name">איראן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/nz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="nz" loading="lazy"></span><span class="t-name">ניו זילנד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group H</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/es.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="es" loading="lazy"></span><span class="t-name">ספרד</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/de.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="de" loading="lazy"></span><span class="t-name">גרמניה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/sa.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="sa" loading="lazy"></span><span class="t-name">ערב הסעודית</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/uy.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="uy" loading="lazy"></span><span class="t-name">אורוגוואי</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group I</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/iq.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="iq" loading="lazy"></span><span class="t-name">עיראק</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/fr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="fr" loading="lazy"></span><span class="t-name">צרפת</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/sn.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="sn" loading="lazy"></span><span class="t-name">סנגל</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">נורווגיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group J</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/ar.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="ar" loading="lazy"></span><span class="t-name">ארגנטינה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/dz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="dz" loading="lazy"></span><span class="t-name">אלגריה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/at.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="at" loading="lazy"></span><span class="t-name">אוסטריה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/jo.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="jo" loading="lazy"></span><span class="t-name">ירדן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group K</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/co.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="co" loading="lazy"></span><span class="t-name">קולומביה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/pt.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="pt" loading="lazy"></span><span class="t-name">פורטוגל</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/uz.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="uz" loading="lazy"></span><span class="t-name">אוזבקיסטן</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/co.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="co" loading="lazy"></span><span class="t-name">קולומביה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div><div class="s-group"><div class="s-group-name">בית Group L</div><table class="s-table">
+<thead><tr>
+  <th class="col-rank">#</th>
+  <th class="col-team">קבוצה</th>
+  <th>מ׳</th><th>נ׳</th><th>ת׳</th><th>ה׳</th><th>גכ</th><th>גנ</th><th>הפ</th><th>נק</th>
+</tr></thead><tbody><tr class="qualify"><td class="col-rank"><span class="rank-num rank-gold">1</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><span style="opacity:.3;font-size:1rem;">⚑</span></span><span class="t-name">אנגליה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="qualify"><td class="col-rank"><span class="rank-num rank-silver">2</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/hr.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="hr" loading="lazy"></span><span class="t-name">קרואטיה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class="third"><td class="col-rank"><span class="rank-num rank-bronze">3</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/gh.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="gh" loading="lazy"></span><span class="t-name">גאנה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr><tr class=""><td class="col-rank"><span class="rank-num ">4</span></td><td class="col-team"><span class="team-cell-inner"><span class="t-flag"><img src="https://flagcdn.com/w40/pa.png" width="20" height="13" style="border-radius:2px;object-fit:cover;vertical-align:middle;" alt="pa" loading="lazy"></span><span class="t-name">פנמה</span></span></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>+0</td><td><strong>0</strong></td></tr></tbody></table></div>
+  </div>
+  <div class="s-legend" style="margin-top:16px;">
+    <div class="s-legend-item"><div class="s-legend-dot" style="background:var(--green)"></div>עולים לשלב הנוקאאוט</div>
+    <div class="s-legend-item"><div class="s-legend-dot" style="background:var(--blue)"></div>עלייה אפשרית (מקום 3)</div>
+  </div>
+</section>
+
+</div>
+
+<script>
+function switchTab(btn, panelId) {
+  const card = btn.closest('.match-card') || document.body;
+  card.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+}
+</script>
+<script>
+(function(){
+  var target = new Date("2026-06-11T19:00:00+00:00").getTime();
+  function tick(){
+    var now = Date.now(), diff = target - now;
+    if(diff <= 0){ return; }
+    var d=Math.floor(diff/86400000),
+        h=Math.floor((diff%86400000)/3600000),
+        m=Math.floor((diff%3600000)/60000),
+        s=Math.floor((diff%60000)/1000);
+    var pad=function(n){return String(n).padStart(2,'0');};
+    var de=document.getElementById('cd-d'),
+        he=document.getElementById('cd-h'),
+        me=document.getElementById('cd-m'),
+        se=document.getElementById('cd-s');
+    if(de) de.textContent=d;
+    if(he) he.textContent=pad(h);
+    if(me) me.textContent=pad(m);
+    if(se) se.textContent=pad(s);
+  }
+  tick(); setInterval(tick,1000);
+})();</script>
+</body>
+</html>
